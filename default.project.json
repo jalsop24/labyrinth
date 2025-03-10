@@ -8,6 +8,9 @@
       },
       "TileSet": {
         "$path": "assets/small_tile_set.rbxm"
+      },
+      "Version": {
+        "$path": "build/version.txt"
       }
     },
     "ServerScriptService": {
