@@ -1,10 +1,13 @@
 {
-  "name": "rojo-testing",
+  "name": "labyrinth",
   "tree": {
     "$className": "DataModel",
     "ReplicatedStorage": {
       "Shared": {
         "$path": "src/shared"
+      },
+      "TileSet": {
+        "$path": "assets/small_tile_set.rbxm"
       }
     },
     "ServerScriptService": {
@@ -44,9 +47,6 @@
             512
           ]
         }
-      },
-      "Tile Set": {
-        "$path": "assets/small_tile_set.rbxm"
       }
     },
     "Lighting": {
