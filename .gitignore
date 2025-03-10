@@ -1,0 +1,9 @@
+# Project build files
+build/*
+!build/.gitkeep
+
+# Roblox Studio lock files
+/*.rbxlx.lock
+/*.rbxl.lock
+
+.env
