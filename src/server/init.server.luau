@@ -3,7 +3,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local DungeonGenerator = require(script.DungeonGenerator)
 
 local TILE_SET = ReplicatedStorage.TileSet
-local ORIGIN = Vector3.new(0,0,0)
+local ORIGIN = Vector3.new(0,20,0)
 local SIZE = Vector2.new(10, 10)
 local MIN_NODES = 15
 local MAX_NODES = 40
