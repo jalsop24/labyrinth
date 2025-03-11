@@ -4,3 +4,6 @@ build-place:
 
 fmt:
 	stylua src/
+
+lint:
+	stylua src/ --check && selene src/
