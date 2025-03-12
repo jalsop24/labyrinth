@@ -1,8 +1,9 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ServerStorage = game:GetService("ServerStorage")
 
-local DungeonGenerator = require(script.DungeonGenerator)
+local DungeonGenerator = require(ServerStorage.DungeonGenerator)
 
-local TILE_SET = ReplicatedStorage.TileSet
+local TILE_SET = ReplicatedStorage.Assets.SmallTileSet
 local ORIGIN = Vector3.new(0, 20, 0)
 local SIZE = Vector2.new(10, 10)
 local MIN_NODES = 15

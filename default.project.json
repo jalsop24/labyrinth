@@ -6,17 +6,20 @@
       "Shared": {
         "$path": "src/shared"
       },
-      "TileSet": {
-        "$path": "assets/small_tile_set.rbxm"
-      },
       "Version": {
         "$path": "build/version.txt"
+      },
+      "Assets": {
+        "$path": "assets/"
       }
     },
     "ServerScriptService": {
       "Server": {
         "$path": "src/server"
       }
+    },
+    "ServerStorage": {
+      "$path": "src/server_storage"
     },
     "StarterPlayer": {
       "StarterPlayerScripts": {
