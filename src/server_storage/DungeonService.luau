@@ -2,6 +2,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerStorage = game:GetService("ServerStorage")
 
 local DungeonGenerator = require(ServerStorage.DungeonGenerator)
+local Network = require(ServerStorage.Network)
 
 local TILE_SET = ReplicatedStorage.Assets.SmallTileSet
 local ORIGIN = Vector3.new(0, 20, 0)
@@ -12,6 +13,11 @@ local MAX_NODES = 40
 local SPAWN_ATTRIBUTE = "spawn_cframe"
 
 local generator = DungeonGenerator.new(TILE_SET)
+
+Network.Dungeon.On(function(player: Player, foo: boolean)
+	print("dungeon event")
+	print(player, foo)
+end)
 
 local DungeonService = {}
 

@@ -1,5 +1,8 @@
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local Network = require(ReplicatedStorage.Network)
+
 local version = ReplicatedStorage.Version.Value
 
 local player = Players.LocalPlayer
@@ -21,4 +24,5 @@ button.Parent = screenGui
 
 button.Activated:Connect(function()
 	print("clicked")
+	Network.Dungeon.Fire(true)
 end)
