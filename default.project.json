@@ -11,6 +11,9 @@
       },
       "Assets": {
         "$path": "assets/"
+      },
+      "Network": {
+        "$path": "build/client.luau"
       }
     },
     "ServerScriptService": {
@@ -19,7 +22,10 @@
       }
     },
     "ServerStorage": {
-      "$path": "src/server_storage"
+      "$path": "src/server_storage",
+      "Network": {
+        "$path": "build/server.luau"
+      }
     },
     "StarterPlayer": {
       "StarterPlayerScripts": {
