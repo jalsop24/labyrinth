@@ -138,7 +138,8 @@ function Dungeon.new(size: Vector2, tileSet: TileSet, minTiles: number, maxTiles
 		populatedTiles[x] = row
 	end
 
-	self.Graph = {}
+	self.Model = nil :: Model?
+	self.Graph = {} :: { DungeonNode }
 	self.Size = size
 	self.PopulatedTiles = populatedTiles
 	self.TileSet = tileSet
@@ -452,6 +453,7 @@ function Dungeon:Generate(origin: Vector3, parent: Instance)
 	local dungeonModel = Instance.new("Model")
 	dungeonModel.Name = "Dungeon"
 	dungeonModel.Parent = parent
+	self.Model = dungeonModel
 
 	local tileOptions = self:_getTileOptions()
 
@@ -526,7 +528,7 @@ end
 function DungeonGenerator:Generate(origin: Vector3, size: Vector2, minNodes: number, maxNodes: number, seed: number)
 	local dungeon = Dungeon.new(size, self.TileSet, minNodes, maxNodes, seed)
 	dungeon:Generate(origin, workspace)
-	return dungeon.Graph
+	return dungeon
 end
 
 return DungeonGenerator
