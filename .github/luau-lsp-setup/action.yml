@@ -29,6 +29,7 @@ runs:
         key: ${{ steps.types-etag.outputs.etag }}
 
     - name: Download types
+      if: ${{ steps.cache.outputs.cache-hit != 'true' }}
       shell: bash
       run: |
         curl "${{ inputs.url }}" -o "${{ inputs.file }}"
