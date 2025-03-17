@@ -38,7 +38,7 @@
       "$properties": {
         "FilteringEnabled": true
       },
-      "Baseplate": {
+      "Floor": {
         "$className": "Part",
         "$properties": {
           "Anchored": true,
@@ -48,11 +48,32 @@
             0.38823
           ],
           "Locked": true,
-          "Position": [
-            0,
-            -10,
-            0
-          ],
+          "CFrame": {
+            "CFrame": {
+              "position": [
+                0,
+                -10,
+                0
+              ],
+              "orientation": [
+                [
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  1
+                ]
+              ]
+            }
+          },
           "Size": [
             512,
             20,
