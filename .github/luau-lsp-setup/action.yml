@@ -18,7 +18,7 @@ runs:
       id: types-etag
       shell: bash
       run: |
-        curl -s -o /dev/null -w "%header{etag}" --head "${inputs.url}" >> $GITHUB_OUTPUT
+        curl -s -o /dev/null -w "%header{etag}" --head "${{ inputs.url }}" >> $GITHUB_OUTPUT
 
     - name: Restore luau-lsp types
       id: cache
@@ -30,4 +30,4 @@ runs:
     - name: Download types
       shell: bash
       run: |
-        curl "${inputs.url}" -o "${{ inputs.file }}"
+        curl "${{ inputs.url }}" -o "${{ inputs.file }}"
