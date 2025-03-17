@@ -18,14 +18,15 @@ runs:
       id: types-etag
       shell: bash
       run: |
-        curl -s -o /dev/null -w "%header{etag}" --head "${{ inputs.url }}" >> $GITHUB_OUTPUT
+        etag=$(curl -s -o /dev/null -w "%header{etag}" --head "${{ inputs.url }}")
+        echo "etag=$etag" >> $GITHUB_OUTPUT
 
     - name: Restore luau-lsp types
       id: cache
       uses: actions/cache@v4
       with:
         path: "${{ inputs.file }}"
-        key: ${{ steps.types-etag.output }}
+        key: ${{ steps.types-etag.outputs.etag }}
 
     - name: Download types
       shell: bash
