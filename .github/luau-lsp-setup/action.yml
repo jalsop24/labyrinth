@@ -1,0 +1,33 @@
+name: luau-lsp setup
+description: Set up luau-lsp
+
+inputs:
+  url:
+    description: Where to download the types from
+    default: https://raw.githubusercontent.com/JohnnyMorganz/luau-lsp/refs/heads/main/scripts/globalTypes.d.luau
+
+  file:
+    description: Where to save the types
+    default: robloxTypes.d.luau
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: "Get latest types"
+      id: types-etag
+      shell: bash
+      run: |
+        curl -s -o /dev/null -w "%header{etag}" --head "${inputs.url}" >> $GITHUB_OUTPUT
+
+    - name: Restore luau-lsp types
+      id: cache
+      uses: actions/cache@v4
+      with:
+        path: "${{ inputs.file }}"
+        key: ${{ steps.types-etag.output }}
+
+    - name: Download types
+      shell: bash
+      run: |
+        curl "${inputs.url}" -o "${{ inputs.file }}"
