@@ -5,7 +5,7 @@ local DungeonGenerator = require(ServerStorage.DungeonGenerator)
 local Network = require(ServerStorage.Network)
 
 local TILE_SET = ReplicatedStorage.Assets.SmallTileSet
-local ORIGIN = Vector3.new(0, 20, 0)
+local ORIGIN = Vector3.new(0, 0, 0)
 local SIZE = Vector2.new(10, 10)
 local MIN_NODES = 15
 local MAX_NODES = 40
