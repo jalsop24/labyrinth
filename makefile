@@ -29,4 +29,4 @@ lsp-types-version:
 lsp-types:
 	curl "${LSP_TYPES_URL}" -o robloxTypes.d.luau
 
-lint-setup: build-version build-network sourcemap lsp-types 
+lint-setup: build-version build-network sourcemap
