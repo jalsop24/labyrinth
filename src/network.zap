@@ -7,3 +7,10 @@ event Dungeon = {
     call: ManyAsync,
     data: (foo: boolean)
 }
+
+event Teleported = {
+    from: Server,
+    type: Reliable,
+    call: ManyAsync,
+    data: (destination: CFrame)
+}

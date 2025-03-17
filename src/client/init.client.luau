@@ -3,11 +3,10 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Network = require(ReplicatedStorage.Network)
 
-local version = ReplicatedStorage.Version.Value
-
+local Camera = workspace.CurrentCamera
 local player = Players.LocalPlayer
 
-print(`build version: {version}`)
+local cameraOffset = CFrame.new(0, 10, 10)
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "MainScreen"
@@ -25,4 +24,21 @@ button.Parent = screenGui
 button.Activated:Connect(function()
 	print("clicked")
 	Network.Dungeon.Fire(true)
+end)
+
+Network.Teleported.On(function(_: CFrame)
+	local character = player.Character
+	if not character then
+		return
+	end
+
+	task.delay(0, function()
+		Camera.CFrame = character.WorldPivot * cameraOffset
+
+		-- char * offset = workspace_cam
+		-- offset = char:inv * workspace_cam
+
+		print(`Set camera - {Camera.CFrame}`)
+		print(`offset - {cameraOffset.Position}`)
+	end)
 end)
