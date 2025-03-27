@@ -3,6 +3,7 @@ local ServerStorage = game:GetService("ServerStorage")
 local TeleportService = game:GetService("TeleportService")
 
 local DungeonGenerator = require(ServerStorage.DungeonGenerator)
+local Env = require(ReplicatedStorage.Env)
 local Network = require(ServerStorage.Network)
 
 local TILE_SET = ReplicatedStorage.Assets.tile_set
@@ -30,7 +31,15 @@ local function localTeleport(player: Player)
 end
 
 local function placeTeleport(player: Player)
-	local placeId = 123
+	local placeId = nil
+	if game.PlaceId == tonumber(Env.DESTINATION_PLACE_ID) then
+		placeId = tonumber(Env.START_PLACE_ID)
+	elseif game.PlaceId == tonumber(Env.START_PLACE_ID) then
+		placeId = tonumber(Env.DESTINATION_PLACE_ID)
+	else
+		print(`In unknown place id={game.PlaceId}`)
+		return
+	end
 
 	TeleportService:TeleportAsync(placeId, { player })
 end
