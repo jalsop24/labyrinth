@@ -12,3 +12,6 @@ build/*
 roblox.yml
 sourcemap.json
 robloxTypes.d.luau
+
+# Wally Packages folder
+Packages/
