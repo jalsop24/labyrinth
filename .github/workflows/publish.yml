@@ -56,13 +56,13 @@ jobs:
     - name: Build
       run: make build-place
 
-    # - name: Publish Start Place
-    #  uses: Ulferno/upload-to-roblox@latest
-     # with:
-      #  universeId: ${{ vars.UNIVERSE_ID }}
-      #  placeId: ${{ vars.START_PLACE_ID }}
-      #  api-key: ${{ secrets.RBX_API_KEY }}
-      #  file: build/start_place.rbxl
+    - name: Publish Start Place
+      uses: Ulferno/upload-to-roblox@latest
+      with:
+        universeId: ${{ vars.UNIVERSE_ID }}
+        placeId: ${{ vars.START_PLACE_ID }}
+        api-key: ${{ secrets.RBX_API_KEY }}
+        file: build/start_place.rbxl
     
     - name: Publish Destination Place
       uses: Ulferno/upload-to-roblox@latest
