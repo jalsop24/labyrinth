@@ -6,9 +6,6 @@ local Network = require(ReplicatedStorage.Network)
 
 local player = Players.LocalPlayer
 
-print("Fusion version")
-print(Fusion.version)
-
 local rootScope = Fusion.scoped(Fusion)
 
 local _screenGui = rootScope:New("ScreenGui")({
