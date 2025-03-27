@@ -1,5 +1,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerStorage = game:GetService("ServerStorage")
+local TeleportService = game:GetService("TeleportService")
 
 local DungeonGenerator = require(ServerStorage.DungeonGenerator)
 local Network = require(ServerStorage.Network)
@@ -16,10 +17,7 @@ local generator = DungeonGenerator.new(TILE_SET)
 
 local spawnPoint: CFrame? = nil
 
-Network.Dungeon.On(function(player: Player, foo: boolean)
-	print("dungeon event")
-	print(player, foo)
-
+local function localTeleport(player: Player)
 	if not player.Character or not spawnPoint then
 		return
 	end
@@ -29,6 +27,23 @@ Network.Dungeon.On(function(player: Player, foo: boolean)
 
 	character:PivotTo(destination)
 	Network.Teleported.Fire(player, destination)
+end
+
+local function placeTeleport(player: Player)
+	local placeId = 123
+
+	TeleportService:TeleportAsync(placeId, { player })
+end
+
+Network.Dungeon.On(function(player: Player, to_place: boolean)
+	print("dungeon event")
+	print(player, to_place)
+
+	if to_place then
+		placeTeleport(player)
+	else
+		localTeleport(player)
+	end
 end)
 
 local DungeonService = {}

@@ -3,6 +3,10 @@ name: CI-CD
 on:
   push:
 
+env:
+  START_PLACE_ID: ${{vars.START_PLACE_ID}}
+  DESTINATION_PLACE_ID: ${{vars.DESTINATION_PLACE_ID}}
+
 jobs:
 
   lint:
