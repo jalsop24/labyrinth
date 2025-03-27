@@ -21,7 +21,7 @@ fmt:
 lint:
 	stylua src/ --check
 	selene src/
-	luau-lsp analyze --defs ./robloxTypes.d.luau --sourcemap ./sourcemap.json src/
+	luau-lsp analyze --defs ./robloxTypes.d.luau --sourcemap ./sourcemap.json --ignore Packages/_Index/elttob_fusion@0.3.0/fusion/src/Memory/deriveScope.luau src/
 
 sourcemap:
 	rojo sourcemap > sourcemap.json
