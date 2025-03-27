@@ -16,7 +16,7 @@ install-packages:
 
 build-rojo:
 	@for place in $(PLACE_NAMES); do \
-		rojo build $$place.project.json -o $$place.rbxl; \
+		rojo build $$place.project.json -o build/$$place.rbxl; \
 	done
 
 build-place: build-version build-network install-packages build-rojo
