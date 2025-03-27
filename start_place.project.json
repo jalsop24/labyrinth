@@ -6,8 +6,8 @@
       "Shared": {
         "$path": "src/common/shared"
       },
-      "Version": {
-        "$path": "build/version.txt"
+      "Env": {
+        "$path": "build/env.toml"
       },
       "Assets": {
         "$path": "assets/"

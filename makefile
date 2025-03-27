@@ -8,8 +8,11 @@ TYPE_CHECK = luau-lsp analyze --defs ./robloxTypes.d.luau --ignore "${LSP_IGNORE
 build-network:
 	zap src/network.zap
 
-build-version:
-	git rev-parse --short HEAD > build/version.txt
+inject-env:
+	echo "" > build/env.toml
+	echo "BUILD_VERSION = \"$$(git rev-parse --short HEAD)\"" >> build/env.toml
+	echo "START_PLACE_ID = \"$${START_PLACE_ID}\"" >> build/env.toml
+	echo "DESTINATION_PLACE_ID = \"$${DESTINATION_PLACE_ID}\"" >> build/env.toml
 
 install-packages:
 	wally install
@@ -19,7 +22,7 @@ build-rojo:
 		rojo build $$place.project.json -o build/$$place.rbxl; \
 	done
 
-build-place: build-version build-network install-packages build-rojo
+build-place: inject-env build-network install-packages build-rojo
 
 fmt:
 	stylua src/
@@ -43,4 +46,4 @@ lsp-types-version:
 lsp-types:
 	curl "${LSP_TYPES_URL}" -o robloxTypes.d.luau
 
-lint-setup: build-version build-network install-packages sourcemap
+lint-setup: inject-env build-network install-packages sourcemap
