@@ -14,7 +14,7 @@ Network.Teleported.On(function(_: CFrame)
 		return
 	end
 
-	task.delay(0, function()
+	task.spawn(function()
 		Camera.CFrame = character.WorldPivot * cameraOffset
 
 		-- char * offset = workspace_cam

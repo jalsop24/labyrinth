@@ -11,7 +11,8 @@ install-packages:
 	wally install
 
 build-rojo:
-	rojo build -o build/placefile.rbxl
+	rojo build start_place.project.json -o build/start_place.rbxl
+	rojo build destination_place.project.json -o build/destination_place.rbxl
 
 build-place: build-version build-network install-packages build-rojo
 
