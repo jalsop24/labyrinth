@@ -23,7 +23,7 @@
       "CommonServer": {
         "$path": "src/common/server"
       },
-      "StartPlaceServer": {
+      "DestinationPlaceServer": {
         "$path": "src/destination_place/server"
       }
     },
