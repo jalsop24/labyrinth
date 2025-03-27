@@ -1,10 +1,10 @@
 {
-  "name": "labyrinth",
+  "name": "labyrinth destination place",
   "tree": {
     "$className": "DataModel",
     "ReplicatedStorage": {
       "Shared": {
-        "$path": "src/shared"
+        "$path": "src/common/shared"
       },
       "Version": {
         "$path": "build/version.txt"
@@ -20,12 +20,15 @@
       }
     },
     "ServerScriptService": {
-      "Server": {
-        "$path": "src/server"
+      "CommonServer": {
+        "$path": "src/common/server"
+      },
+      "DestinationPlaceServer": {
+        "$path": "src/destination_place/server"
       }
     },
     "ServerStorage": {
-      "$path": "src/server_storage",
+      "$path": "src/common/server_storage",
       "Network": {
         "$path": "build/server.luau"
       }
@@ -33,7 +36,7 @@
     "StarterPlayer": {
       "StarterPlayerScripts": {
         "Client": {
-          "$path": "src/client"
+          "$path": "src/common/client"
         }
       }
     },

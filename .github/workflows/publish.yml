@@ -36,7 +36,8 @@ jobs:
 
     environment: 
       name: testing
-      url: "https://www.roblox.com/games/${{vars.PLACE_ID}}"
+      url: "https://www.roblox.com/games/${{vars.START_PLACE_ID}}"
+
     name: Build place and publish
     runs-on: ubuntu-latest
 
@@ -55,10 +56,18 @@ jobs:
     - name: Build
       run: make build-place
 
-    - name: Publish
+    - name: Publish Start Place
       uses: Ulferno/upload-to-roblox@latest
       with:
         universeId: ${{ vars.UNIVERSE_ID }}
-        placeId: ${{ vars.PLACE_ID }}
+        placeId: ${{ vars.START_PLACE_ID }}
         api-key: ${{ secrets.RBX_API_KEY }}
-        file: build/placefile.rbxl
+        file: build/start_place.rbxl
+    
+    - name: Publish Destination Place
+      uses: Ulferno/upload-to-roblox@latest
+      with:
+        universeId: ${{ vars.UNIVERSE_ID }}
+        placeId: ${{ vars.DESTINATION_PLACE_ID }}
+        api-key: ${{ secrets.RBX_API_KEY }}
+        file: build/destination_place.rbxl
