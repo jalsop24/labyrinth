@@ -1,6 +1,6 @@
 # Labyrinth
 
-A template repo that contains an automatic build and deployment workflow using rojo
+Repo for the game Labyrinth - exploring procedurally generated dungeon worlds
 
 ## Getting Started
 
