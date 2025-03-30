@@ -7,9 +7,6 @@
       "Env": {
         "$path": "build/env.toml"
       },
-      "Assets": {
-        "$path": "assets/"
-      },
       "Packages": {
         "$path": "Packages/"
       }
