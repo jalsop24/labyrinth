@@ -3,17 +3,12 @@
   "tree": {
     "$className": "DataModel",
     "ReplicatedStorage": {
-      "Shared": {
-        "$path": "src/common/shared"
-      },
+      "$path": "src/common/shared",
       "Env": {
         "$path": "build/env.toml"
       },
       "Assets": {
         "$path": "assets/"
-      },
-      "Network": {
-        "$path": "build/client_network.luau"
       },
       "Packages": {
         "$path": "Packages/"
@@ -28,10 +23,7 @@
       }
     },
     "ServerStorage": {
-      "$path": "src/common/server_storage",
-      "Network": {
-        "$path": "build/server_network.luau"
-      }
+      "$path": "src/common/server_storage"
     },
     "StarterPlayer": {
       "StarterPlayerScripts": {
