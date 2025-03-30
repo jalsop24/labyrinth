@@ -6,12 +6,10 @@
       "$path": "src/common/shared"
     },
     "ServerScriptService": {
-      "CommonServer": {
+      "Common": {
         "$path": "src/common/server"
       },
-      "StartPlaceServer": {
-        "$path": "src/start_place/server"
-      }
+      "$path": "src/start_place/server"
     },
     "ServerStorage": {
       "$path": "src/common/server_storage"
