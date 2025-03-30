@@ -1,0 +1,6 @@
+{
+    "name": "Network",
+    "tree": {
+        "$path": "../../../../build/client_network.luau"
+    }
+}

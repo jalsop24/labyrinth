@@ -1,5 +1,5 @@
-opt server_output = "../build/server.luau"
-opt client_output = "../build/client.luau"
+opt server_output = "../build/server_network.luau"
+opt client_output = "../build/client_network.luau"
 
 event Dungeon = {
     from: Client,

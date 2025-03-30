@@ -14,4 +14,6 @@ roblox.yml
 robloxTypes.d.luau
 
 # Wally Packages folder
-Packages/
+Packages/*
+# Allows pointer object
+!Packages/default.project.json
