@@ -13,7 +13,7 @@
         "$path": "assets/"
       },
       "Network": {
-        "$path": "build/client.luau"
+        "$path": "build/client_network.luau"
       },
       "Packages": {
         "$path": "Packages/"
@@ -30,7 +30,7 @@
     "ServerStorage": {
       "$path": "src/common/server_storage",
       "Network": {
-        "$path": "build/server.luau"
+        "$path": "build/server_network.luau"
       }
     },
     "StarterPlayer": {
