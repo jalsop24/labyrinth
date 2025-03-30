@@ -5,6 +5,7 @@ local TeleportService = game:GetService("TeleportService")
 local Env = require(ReplicatedStorage.Env)
 local Logging = require(ServerStorage.Logging)
 local Network = require(ServerStorage.Network)
+local ServerMessage = require(ServerStorage.ServerMessage)
 
 local PlayerTransport = {}
 
@@ -21,6 +22,7 @@ function PlayerTransport:SendToPlace(player: Player)
 
 	local result = TeleportService:TeleportAsync(placeId, { player })
 	Logging:Log("Sent player to place", { UserId = player.UserId, result = result })
+	ServerMessage:SendMessage(result.PrivateServerId, "hi")
 end
 
 function PlayerTransport:SentToCFrame(player: Player, destination: CFrame)
