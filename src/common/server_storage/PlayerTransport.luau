@@ -20,7 +20,7 @@ function PlayerTransport:SendToPlace(player: Player)
 		return
 	end
 
-	local result = TeleportService:TeleportAsync(placeId, { player })
+	local result = TeleportService:TeleportAsync(placeId, { player }, { ShouldReserveServer = true })
 	Logging:Log("Sent player to place", { UserId = player.UserId, result = result })
 	ServerMessage:SendMessage(result.PrivateServerId, "hi")
 end
