@@ -20,7 +20,10 @@ function PlayerTransport:SendToPlace(player: Player)
 		return
 	end
 
-	local result = TeleportService:TeleportAsync(placeId, { player }, { ShouldReserveServer = true })
+	local options = Instance.new("TeleportOptions")
+	options.ShouldReserveServer = true
+
+	local result = TeleportService:TeleportAsync(placeId, { player }, options)
 	Logging:Log("Sent player to place", { UserId = player.UserId, result = result })
 	ServerMessage:SendMessage(result.PrivateServerId, "hi")
 end
