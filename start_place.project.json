@@ -3,13 +3,7 @@
   "tree": {
     "$className": "DataModel",
     "ReplicatedStorage": {
-      "$path": "src/common/shared",
-      "Env": {
-        "$path": "build/env.toml"
-      },
-      "Packages": {
-        "$path": "Packages/"
-      }
+      "$path": "src/common/shared"
     },
     "ServerScriptService": {
       "CommonServer": {
