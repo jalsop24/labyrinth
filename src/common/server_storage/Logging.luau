@@ -1,3 +1,4 @@
+local HttpService = game:GetService("HttpService")
 local MemoryStoreService = game:GetService("MemoryStoreService")
 local RunService = game:GetService("RunService")
 
@@ -56,7 +57,7 @@ function Logging.MemoryStoreHandler(record: Record)
 	local EXPIRATION = 60 * 60 -- seconds
 
 	local queue = MemoryStoreService:GetQueue("logging")
-	queue:AddAsync(record, EXPIRATION)
+	queue:AddAsync(HttpService:JSONEncode(record), EXPIRATION)
 end
 
 Logging:RegisterHandler(Logging.PrintHandler)
