@@ -57,7 +57,11 @@ function Logging.MemoryStoreHandler(record: Record)
 	local EXPIRATION = 60 * 60 -- seconds
 
 	local queue = MemoryStoreService:GetQueue("logging")
-	queue:AddAsync(record, EXPIRATION)
+	queue:AddAsync({
+		Message = record.Message,
+		Timestamp = record.Timestamp:ToIsoDate(),
+		Data = HttpService:JSONEncode(record.Data),
+	}, EXPIRATION)
 end
 
 Logging:RegisterHandler(Logging.PrintHandler)
