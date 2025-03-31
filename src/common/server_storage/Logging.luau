@@ -47,7 +47,7 @@ function Logging.PrintHandler(record: Record)
 
 	if record.Data ~= nil then
 		print(message)
-		print(record.Data)
+		print(HttpService:JSONEncode(record.Data))
 	else
 		print(message)
 	end
@@ -57,7 +57,7 @@ function Logging.MemoryStoreHandler(record: Record)
 	local EXPIRATION = 60 * 60 -- seconds
 
 	local queue = MemoryStoreService:GetQueue("logging")
-	queue:AddAsync(HttpService:JSONEncode(record), EXPIRATION)
+	queue:AddAsync(record, EXPIRATION)
 end
 
 Logging:RegisterHandler(Logging.PrintHandler)
