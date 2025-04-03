@@ -13,11 +13,14 @@ local function onMessage(message: Message)
 end
 
 MessagingService:SubscribeAsync(tostring(game.JobId), onMessage)
+if game.PrivateServerId ~= "" then
+	MessagingService:SubscribeAsync(tostring(game.PrivateServerId), onMessage)
+end
 
 local ServerMessage = {}
 
-function ServerMessage:SendMessage(jobId: number, message: any)
-	MessagingService:PublishAsync(tostring(jobId), message)
+function ServerMessage:SendMessage(serverId: number | string, message: any)
+	MessagingService:PublishAsync(tostring(serverId), message)
 end
 
 return ServerMessage
