@@ -25,7 +25,7 @@ local function pollQueue(queue: MemoryStoreQueue)
 				numItems = #items
 			end
 
-			Logging:Log("polled message queue", { numItems = numItems })
+			Logging:Log("Queue items", { numItems = numItems })
 
 			if numItems == 0 then
 				return

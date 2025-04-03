@@ -2,10 +2,8 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerStorage = game:GetService("ServerStorage")
 
 local DungeonGenerator = require(ServerStorage.DungeonGenerator)
-local Logging = require(ServerStorage.Logging)
 local Network = require(ServerStorage.Network)
 local PlayerTransport = require(ServerStorage.PlayerTransport)
-local ServerMessage = require(ServerStorage.ServerMessage)
 
 local TILE_SET = ReplicatedStorage.Assets.tile_set
 local ORIGIN = Vector3.new(0, 0, 0)
@@ -45,11 +43,8 @@ function DungeonService:CreateDungeon(seed: number)
 	spawnPoint = spawnPart:GetPivot() + Vector3.new(0, 4, 0)
 end
 
-ServerMessage:RegisterMessageHandler(function(message: any)
-	Logging:Log("Received message", { Message = tostring(message), JobId = game.JobId })
-	if type(message) == "table" then
-		Logging:Log("message data", message)
-	end
-end)
+function DungeonService:HasGeneratedDungeon()
+	return spawnPoint ~= nil
+end
 
 return DungeonService
