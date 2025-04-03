@@ -12,9 +12,11 @@ local function onMessage(message: Message)
 	Logging:Log("Received message", { Message = message, JobId = game.JobId })
 end
 
-MessagingService:SubscribeAsync(tostring(game.JobId), onMessage)
-if game.PrivateServerId ~= "" then
-	MessagingService:SubscribeAsync(tostring(game.PrivateServerId), onMessage)
+local function setupSubs()
+	MessagingService:SubscribeAsync(tostring(game.JobId), onMessage)
+	if game.PrivateServerId ~= "" then
+		MessagingService:SubscribeAsync(tostring(game.PrivateServerId), onMessage)
+	end
 end
 
 local ServerMessage = {}
@@ -23,4 +25,5 @@ function ServerMessage:SendMessage(serverId: number | string, message: any)
 	MessagingService:PublishAsync(tostring(serverId), message)
 end
 
+setupSubs()
 return ServerMessage
