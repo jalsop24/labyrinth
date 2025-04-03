@@ -24,7 +24,12 @@ function PlayerTransport:SendToPlace(player: Player)
 	options.ShouldReserveServer = true
 
 	local result = TeleportService:TeleportAsync(placeId, { player }, options)
-	Logging:Log("Sent player to place", { UserId = player.UserId, result = result })
+
+	Logging:Log("Sent player to place", {
+		UserId = player.UserId,
+		PrivateServerId = result.PrivateServerId,
+	})
+
 	ServerMessage:SendMessage(result.PrivateServerId, "hi")
 end
 
