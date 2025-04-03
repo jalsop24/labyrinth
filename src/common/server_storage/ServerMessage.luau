@@ -21,15 +21,21 @@ local function pollQueue(queue: MemoryStoreQueue)
 		local success, errorMessage = pcall(function()
 			local items, id = queue:ReadAsync(10, false, 30)
 
-			Logging:Log("polled message queue", { numItems = #items })
+			local numItems = 0
+			if items ~= nil then
+				numItems = #items
+			end
+
+			Logging:Log("polled message queue", { numItems = numItems })
+
+			if numItems == 0 then
+				return
+			end
 
 			for _, item in items do
 				onMessage(item)
 			end
-
-			if #items > 0 then
-				queue:RemoveAsync(id)
-			end
+			queue:RemoveAsync(id)
 		end)
 		Logging:Log("Polled message queue", { success = success, error = errorMessage })
 		task.wait(0.5)
