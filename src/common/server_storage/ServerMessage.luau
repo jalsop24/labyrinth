@@ -3,17 +3,16 @@ local ServerStorage = game:GetService("ServerStorage")
 
 local Logging = require(ServerStorage.Logging)
 
-type Message = {
-	Name: string,
-	Data: any,
-}
+local handlers = {}
 
 local function getQueue(privateServerId: string)
 	return MemoryStoreService:GetQueue(`messages-{privateServerId}`)
 end
 
 local function onMessage(message: any)
-	Logging:Log("Received message", { Message = tostring(message), JobId = game.JobId })
+	for _, handler in handlers do
+		pcall(handler, message)
+	end
 end
 
 local function pollQueue(queue: MemoryStoreQueue)
@@ -54,6 +53,10 @@ local ServerMessage = {}
 function ServerMessage:SendMessage(serverId: number | string, message: any)
 	local queue = getQueue(tostring(serverId))
 	queue:AddAsync(message, 1800)
+end
+
+function ServerMessage:RegisterMessageHandler(handler: (...any) -> nil)
+	table.insert(handlers, handler)
 end
 
 setupSubs()
