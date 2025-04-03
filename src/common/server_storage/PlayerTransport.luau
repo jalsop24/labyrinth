@@ -30,9 +30,7 @@ function PlayerTransport:SendToPlace(player: Player)
 		PrivateServerId = result.PrivateServerId,
 	})
 
-	task.delay(5, function()
-		ServerMessage:SendMessage(result.PrivateServerId, "hi")
-	end)
+	ServerMessage:SendMessage(result.PrivateServerId, "hi")
 end
 
 function PlayerTransport:SentToCFrame(player: Player, destination: CFrame)

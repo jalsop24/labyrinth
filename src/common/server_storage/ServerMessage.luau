@@ -19,8 +19,10 @@ end
 
 local function pollQueue(queue: MemoryStoreQueue)
 	while true do
-		pcall(function()
+		local success, errorMessage = pcall(function()
 			local items, id = queue:ReadAsync(10, false, 30)
+
+			Logging:Log("polled message queue", { numItems = #items })
 
 			for _, item in items do
 				onMessage({ Name = "x", Data = item })
@@ -30,6 +32,7 @@ local function pollQueue(queue: MemoryStoreQueue)
 				queue:RemoveAsync(id)
 			end
 		end)
+		Logging:Log("Polled message queue", { success = success, error = errorMessage })
 		task.wait(0.5)
 	end
 end
