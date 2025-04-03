@@ -30,7 +30,7 @@ function PlayerTransport:SendToPlace(player: Player)
 		PrivateServerId = result.PrivateServerId,
 	})
 
-	ServerMessage:SendMessage(result.PrivateServerId, "hi")
+	ServerMessage:SendMessage(result.PrivateServerId, { sourcePlace = game.JobId, seed = "1234" })
 end
 
 function PlayerTransport:SentToCFrame(player: Player, destination: CFrame)

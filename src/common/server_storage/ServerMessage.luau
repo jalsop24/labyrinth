@@ -1,5 +1,4 @@
 local MemoryStoreService = game:GetService("MemoryStoreService")
-local MessagingService = game:GetService("MessagingService")
 local ServerStorage = game:GetService("ServerStorage")
 
 local Logging = require(ServerStorage.Logging)
@@ -13,8 +12,8 @@ local function getQueue(privateServerId: string)
 	return MemoryStoreService:GetQueue(`messages-{privateServerId}`)
 end
 
-local function onMessage(message: Message)
-	Logging:Log("Received message", { Message = message, JobId = game.JobId })
+local function onMessage(message: any)
+	Logging:Log("Received message", { Message = tostring(message), JobId = game.JobId })
 end
 
 local function pollQueue(queue: MemoryStoreQueue)
@@ -25,7 +24,7 @@ local function pollQueue(queue: MemoryStoreQueue)
 			Logging:Log("polled message queue", { numItems = #items })
 
 			for _, item in items do
-				onMessage({ Name = "x", Data = item })
+				onMessage(item)
 			end
 
 			if #items > 0 then
@@ -38,9 +37,7 @@ local function pollQueue(queue: MemoryStoreQueue)
 end
 
 local function setupSubs()
-	MessagingService:SubscribeAsync(tostring(game.JobId), onMessage)
 	if game.PrivateServerId ~= "" then
-		MessagingService:SubscribeAsync(tostring(game.PrivateServerId), onMessage)
 		local queue = getQueue(game.PrivateServerId)
 		task.spawn(pollQueue, queue)
 	end
