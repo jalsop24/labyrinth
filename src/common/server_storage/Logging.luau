@@ -12,10 +12,15 @@ type Record = {
 	Message: string,
 	Data: RecordData,
 	Timestamp: DateTime,
+	UtcMillis: number,
 	Source: string,
 	LineNum: number,
 	FuncName: string?,
 }
+
+local function isoDatetime(datetime: DateTime)
+	return datetime:FormatUniversalTime("YYYY-MM-DD HH:mm:ss.SSS+00:00", "en-gb")
+end
 
 type RecordHandler = (Record) -> nil
 
@@ -35,6 +40,7 @@ function Logging:Log(message: string, data: RecordData)
 		Message = message,
 		Data = data,
 		Timestamp = DateTime.now(),
+		UtcMillis = tick() * 1000,
 		Source = source,
 		LineNum = lineNum,
 		FuncName = funcName,
@@ -50,7 +56,7 @@ end
 -- -- --
 
 function Logging.PrintHandler(record: Record)
-	local message = `{record.Message} - {record.Source}:{record.LineNum}`
+	local message = `[{isoDatetime(record.Timestamp)}] {record.Message} - {record.Source}:{record.LineNum}`
 
 	if record.Data ~= nil then
 		print(message)
@@ -66,7 +72,8 @@ function Logging.MemoryStoreHandler(record: Record)
 	local queue = MemoryStoreService:GetQueue("logging")
 	queue:AddAsync({
 		Message = record.Message,
-		Timestamp = record.Timestamp:ToIsoDate(),
+		Timestamp = isoDatetime(record.Timestamp),
+		UtcMillis = record.UtcMillis,
 		Data = HttpService:JSONEncode(record.Data),
 		Source = record.Source,
 		LineNum = record.LineNum,
