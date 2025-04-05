@@ -1,3 +1,4 @@
+local RunService = game:GetService("RunService")
 local ServerStorage = game:GetService("ServerStorage")
 
 local DungeonService = require(ServerStorage.DungeonService)
@@ -6,7 +7,7 @@ local ServerMessage = require(ServerStorage.ServerMessage)
 
 print("Hi from destination place")
 
-ServerMessage:RegisterMessageHandler(function(message: any)
+local function generateDungeon(message: any)
 	Logging:Log("Received message", { Message = tostring(message), JobId = game.JobId })
 
 	if type(message) ~= "table" then
@@ -19,4 +20,10 @@ ServerMessage:RegisterMessageHandler(function(message: any)
 	end
 
 	DungeonService:CreateDungeon(message.seed)
-end)
+end
+
+ServerMessage:RegisterMessageHandler(generateDungeon)
+
+if RunService:IsStudio() then
+	generateDungeon({ seed = 1234 })
+end
