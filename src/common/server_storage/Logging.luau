@@ -12,6 +12,9 @@ type Record = {
 	Message: string,
 	Data: RecordData,
 	Timestamp: DateTime,
+	Source: string,
+	LineNum: number,
+	FuncName: string?,
 }
 
 type RecordHandler = (Record) -> nil
@@ -27,10 +30,14 @@ local function runHandlers(record: Record)
 end
 
 function Logging:Log(message: string, data: RecordData)
+	local source, lineNum, funcName = debug.info(2, "sln")
 	local record: Record = {
 		Message = message,
 		Data = data,
 		Timestamp = DateTime.now(),
+		Source = source,
+		LineNum = lineNum,
+		FuncName = funcName,
 	}
 	runHandlers(record)
 	table.insert(records, record)
@@ -43,7 +50,7 @@ end
 -- -- --
 
 function Logging.PrintHandler(record: Record)
-	local message = `[{record.Timestamp:ToIsoDate()}] - {record.Message}`
+	local message = `{record.Message} - {record.Source}:{record.LineNum}`
 
 	if record.Data ~= nil then
 		print(message)
@@ -61,6 +68,9 @@ function Logging.MemoryStoreHandler(record: Record)
 		Message = record.Message,
 		Timestamp = record.Timestamp:ToIsoDate(),
 		Data = HttpService:JSONEncode(record.Data),
+		Source = record.Source,
+		LineNum = record.LineNum,
+		FuncName = record.FuncName,
 	}, EXPIRATION)
 end
 
