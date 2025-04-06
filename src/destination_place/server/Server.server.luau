@@ -10,6 +10,7 @@ print("Hi from destination place")
 
 local function createSpawnPoint(location: CFrame)
 	local spawnPoint = Instance.new("SpawnLocation")
+	spawnPoint.Anchored = true
 	spawnPoint:PivotTo(location)
 	spawnPoint.CanCollide = false
 	spawnPoint.Transparency = 1
