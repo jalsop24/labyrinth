@@ -5,6 +5,8 @@ local Env = require(ReplicatedStorage.Env)
 local Fusion = require(ReplicatedStorage.Packages.Fusion)
 local Network = require(ReplicatedStorage.Network)
 
+type Fusion = typeof(Fusion)
+
 local player = Players.LocalPlayer
 
 local rootScope = Fusion.scoped(Fusion)
@@ -19,22 +21,26 @@ local function getButtonText()
 	return "Go to home"
 end
 
+local function DungeonButton(scope: Fusion.Scope<Fusion>, props: { Text: Fusion.UsedAs<string> })
+	return scope:New("TextButton")({
+		Text = props.Text,
+		AnchorPoint = Vector2.new(1, 1),
+		Position = UDim2.new(1, -5, 1, -5),
+		BackgroundTransparency = 0,
+		Size = UDim2.fromOffset(100, 45),
+		[Fusion.OnEvent("Activated")] = function()
+			print("clicked")
+			Network.Dungeon.Fire(true)
+		end,
+	})
+end
+
 local _screenGui = rootScope:New("ScreenGui")({
 	Name = "MainScreen",
 	ResetOnSpawn = false,
 	Parent = player.PlayerGui,
 
 	[Fusion.Children] = {
-		textButton = rootScope:New("TextButton")({
-			Text = getButtonText(),
-			AnchorPoint = Vector2.new(1, 1),
-			Position = UDim2.new(1, -5, 1, -5),
-			BackgroundTransparency = 0,
-			Size = UDim2.fromOffset(100, 45),
-			[Fusion.OnEvent("Activated")] = function()
-				print("clicked")
-				Network.Dungeon.Fire(true)
-			end,
-		}),
+		textButton = DungeonButton(rootScope, { Text = getButtonText() }),
 	},
 })
