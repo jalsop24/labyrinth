@@ -8,7 +8,7 @@ local Network = require(ServerStorage.Network)
 
 local PlayerTransport = {}
 
-function PlayerTransport:SendToPlace(player: Player): TeleportAsyncResult?
+function PlayerTransport:SendToPlace(player: Player): string?
 	local placeId = nil
 	if game.PlaceId == tonumber(Env.DESTINATION_PLACE_ID) then
 		placeId = tonumber(Env.START_PLACE_ID)
@@ -29,7 +29,7 @@ function PlayerTransport:SendToPlace(player: Player): TeleportAsyncResult?
 		PrivateServerId = result.PrivateServerId,
 	})
 
-	return result
+	return result.PrivateServerId
 end
 
 function PlayerTransport:SentToCFrame(player: Player, destination: CFrame)

@@ -23,8 +23,8 @@ Network.Dungeon.On(function(player: Player, to_place: boolean)
 	print(player, to_place)
 
 	if to_place then
-		local result = PlayerTransport:SendToPlace(player)
-		ServerMessage:SendMessage(result.PrivateServerId, { sourcePlace = game.JobId, seed = "1234" })
+		local serverId = PlayerTransport:SendToPlace(player)
+		ServerMessage:SendMessage(serverId, { sourcePlace = game.JobId, seed = "1234" })
 	else
 		assert(spawnPoint ~= nil, "Spawn point must not be nil")
 		PlayerTransport:SentToCFrame(player, spawnPoint)
