@@ -30,7 +30,11 @@ local function DungeonButton(scope: Fusion.Scope<Fusion>, props: { Text: Fusion.
 		Size = UDim2.fromOffset(100, 45),
 		[Fusion.OnEvent("Activated")] = function()
 			print("clicked")
-			Network.Dungeon.Fire(true, "4321")
+			if isStartPlace then
+				Network.Dungeon.Fire(true, "4321")
+			else
+				Network.Dungeon.Fire(false)
+			end
 		end,
 	})
 end

@@ -24,6 +24,10 @@ build-rojo:
 
 build-place: inject-env build-network install-packages build-rojo
 
+serve:
+	cp build/${PLACE}.env.toml build/env.toml
+	rojo serve ${PLACE}_place.project.json
+
 fmt:
 	stylua src/
 
