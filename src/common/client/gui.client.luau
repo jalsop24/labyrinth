@@ -30,7 +30,7 @@ local function DungeonButton(scope: Fusion.Scope<Fusion>, props: { Text: Fusion.
 		Size = UDim2.fromOffset(100, 45),
 		[Fusion.OnEvent("Activated")] = function()
 			print("clicked")
-			Network.Dungeon.Fire(true)
+			Network.Dungeon.Fire(true, "4321")
 		end,
 	})
 end
