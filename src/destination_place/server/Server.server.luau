@@ -20,6 +20,12 @@ local function createSpawnPoint(location: CFrame)
 	return spawnPoint
 end
 
+local function spawnPlayers()
+	for _, player in Players:GetPlayers() do
+		player:LoadCharacter()
+	end
+end
+
 local function generateDungeon(message: any)
 	Logging:Log("Received message", { Message = tostring(message), JobId = game.JobId })
 
@@ -39,6 +45,7 @@ local function generateDungeon(message: any)
 		{ x = spawnLocation.Position.X, y = spawnLocation.Position.Y, z = spawnLocation.Position.Z }
 	)
 	Players.CharacterAutoLoads = true
+	spawnPlayers()
 end
 
 local function handleHomeTeleport(player: Player)
