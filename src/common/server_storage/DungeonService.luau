@@ -23,7 +23,7 @@ Network.Dungeon.On(function(player: Player, toPlace: boolean, seed: string?)
 	Logging:Log("dungeon event", { Player = player.Name, ToPlace = toPlace, Seed = seed or "nil" })
 
 	if toPlace then
-		local serverId = PlayerTransport:SendToPlace(player)
+		local serverId = PlayerTransport:SendToPlace(player, "destination")
 		ServerMessage:SendMessage(serverId, { sourcePlace = game.JobId, seed = seed })
 	else
 		assert(spawnPoint ~= nil, "Spawn point must not be nil")

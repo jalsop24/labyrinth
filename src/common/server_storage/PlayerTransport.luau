@@ -9,16 +9,18 @@ local Network = require(ServerStorage.Network)
 
 local PlayerTransport = {}
 
-function PlayerTransport:SendToPlace(player: Player): string?
+export type Place = "start" | "destination"
+
+function PlayerTransport:SendToPlace(player: Player, place: Place): string?
 	if RunService:IsStudio() then
 		Logging:Log("In studio - not teleporting player", { PlayerName = player.Name })
 		return
 	end
 
 	local placeId = nil
-	if game.PlaceId == tonumber(Env.DESTINATION_PLACE_ID) then
+	if place == "start" then
 		placeId = tonumber(Env.START_PLACE_ID)
-	elseif game.PlaceId == tonumber(Env.START_PLACE_ID) then
+	elseif place == "destination" then
 		placeId = tonumber(Env.DESTINATION_PLACE_ID)
 	else
 		Logging:Log("In unknown place", { PlaceId = game.PlaceId })

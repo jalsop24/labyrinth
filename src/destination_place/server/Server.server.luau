@@ -4,6 +4,8 @@ local ServerStorage = game:GetService("ServerStorage")
 
 local DungeonService = require(ServerStorage.DungeonService)
 local Logging = require(ServerStorage.Logging)
+local Network = require(ServerStorage.Network)
+local PlayerTransport = require(ServerStorage.PlayerTransport)
 local ServerMessage = require(ServerStorage.ServerMessage)
 
 print("Hi from destination place")
@@ -39,7 +41,12 @@ local function generateDungeon(message: any)
 	Players.CharacterAutoLoads = true
 end
 
+local function handleHomeTeleport(player: Player)
+	PlayerTransport:SendToPlace(player, "start")
+end
+
 ServerMessage:RegisterMessageHandler(generateDungeon)
+Network.TeleportHome.On(handleHomeTeleport)
 
 if RunService:IsStudio() then
 	generateDungeon({ seed = 1234 })
