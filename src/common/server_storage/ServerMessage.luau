@@ -26,18 +26,20 @@ local function pollQueue(queue: MemoryStoreQueue)
 				numItems = #items
 			end
 
-			Logging:Log("Queue items", { numItems = numItems })
-
 			if numItems == 0 then
 				return
 			end
+
+			Logging:Log("Queue items", { numItems = numItems })
 
 			for _, item in items do
 				onMessage(item)
 			end
 			queue:RemoveAsync(id)
 		end)
-		Logging:Log("Polled message queue", { success = success, error = errorMessage })
+		if not success then
+			Logging:Log("Polled message queue", { success = success, error = errorMessage })
+		end
 		task.wait(0.5)
 	end
 end
