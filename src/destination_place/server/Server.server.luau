@@ -1,3 +1,4 @@
+local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local ServerStorage = game:GetService("ServerStorage")
 
@@ -6,6 +7,15 @@ local Logging = require(ServerStorage.Logging)
 local ServerMessage = require(ServerStorage.ServerMessage)
 
 print("Hi from destination place")
+
+local function createSpawnPoint(location: CFrame)
+	local spawnPoint = Instance.new("SpawnLocation")
+	spawnPoint:PivotTo(location)
+	spawnPoint.CanCollide = false
+	spawnPoint.Transparency = 1
+	spawnPoint.Parent = workspace
+	return spawnPoint
+end
 
 local function generateDungeon(message: any)
 	Logging:Log("Received message", { Message = tostring(message), JobId = game.JobId })
@@ -19,7 +29,9 @@ local function generateDungeon(message: any)
 		return
 	end
 
-	DungeonService:CreateDungeon(message.seed)
+	local spawnLocation = DungeonService:CreateDungeon(message.seed)
+	createSpawnPoint(spawnLocation)
+	Players.CharacterAutoLoads = true
 end
 
 ServerMessage:RegisterMessageHandler(generateDungeon)

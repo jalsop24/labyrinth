@@ -33,7 +33,7 @@ end)
 
 local DungeonService = {}
 
-function DungeonService:CreateDungeon(seed: number)
+function DungeonService:CreateDungeon(seed: number): CFrame
 	local dungeon = generator:Generate(ORIGIN, SIZE, MIN_NODES, MAX_NODES, seed)
 	print(dungeon)
 
@@ -43,6 +43,8 @@ function DungeonService:CreateDungeon(seed: number)
 
 	dungeon.Model:SetAttribute(SPAWN_ATTRIBUTE, spawnPart:GetPivot())
 	spawnPoint = spawnPart:GetPivot() + Vector3.new(0, 4, 0)
+	assert(spawnPoint ~= nil, "")
+	return spawnPoint
 end
 
 function DungeonService:HasGeneratedDungeon()
