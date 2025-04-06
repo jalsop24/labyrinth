@@ -45,7 +45,7 @@ function PlayerTransport:SentToCFrame(player: Player, destination: CFrame)
 
 	local character = player.Character
 
-	character:PivotTo(destination)
+	character:PivotTo(destination + Vector3.new(0, 4, 0))
 	Network.Teleported.Fire(player, destination)
 end
 

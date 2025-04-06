@@ -42,7 +42,7 @@ function DungeonService:CreateDungeon(seed: number): CFrame
 	local spawnPart: BasePart = room.Spawn
 
 	dungeon.Model:SetAttribute(SPAWN_ATTRIBUTE, spawnPart:GetPivot())
-	spawnPoint = spawnPart:GetPivot() + Vector3.new(0, 4, 0)
+	spawnPoint = spawnPart:GetPivot()
 	assert(spawnPoint ~= nil, "")
 	return spawnPoint
 end
