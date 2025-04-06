@@ -5,7 +5,7 @@ event Dungeon = {
     from: Client,
     type: Reliable,
     call: ManyAsync,
-    data: (to_place: boolean)
+    data: (toPlace: boolean, seed: string?)
 }
 
 event Teleported = {

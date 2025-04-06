@@ -1,4 +1,5 @@
 local MemoryStoreService = game:GetService("MemoryStoreService")
+local RunService = game:GetService("RunService")
 local ServerStorage = game:GetService("ServerStorage")
 
 local Logging = require(ServerStorage.Logging)
@@ -51,6 +52,10 @@ end
 local ServerMessage = {}
 
 function ServerMessage:SendMessage(serverId: number | string, message: any)
+	if RunService:IsStudio() then
+		Logging:Log("In studio - not sending real message", { Message = message })
+		return
+	end
 	local queue = getQueue(tostring(serverId))
 	queue:AddAsync(message, 1800)
 end

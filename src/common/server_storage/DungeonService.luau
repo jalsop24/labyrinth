@@ -2,8 +2,10 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerStorage = game:GetService("ServerStorage")
 
 local DungeonGenerator = require(ServerStorage.DungeonGenerator)
+local Logging = require(ServerStorage.Logging)
 local Network = require(ServerStorage.Network)
 local PlayerTransport = require(ServerStorage.PlayerTransport)
+local ServerMessage = require(ServerStorage.ServerMessage)
 
 local TILE_SET = ReplicatedStorage.Assets.tile_set
 local ORIGIN = Vector3.new(0, 0, 0)
@@ -17,12 +19,12 @@ local generator = DungeonGenerator.new(TILE_SET)
 
 local spawnPoint: CFrame? = nil
 
-Network.Dungeon.On(function(player: Player, to_place: boolean)
-	print("dungeon event")
-	print(player, to_place)
+Network.Dungeon.On(function(player: Player, toPlace: boolean, seed: string?)
+	Logging:Log("dungeon event", { Player = player.Name, ToPlace = toPlace, Seed = seed or "nil" })
 
-	if to_place then
-		PlayerTransport:SendToPlace(player)
+	if toPlace then
+		local serverId = PlayerTransport:SendToPlace(player)
+		ServerMessage:SendMessage(serverId, { sourcePlace = game.JobId, seed = seed })
 	else
 		assert(spawnPoint ~= nil, "Spawn point must not be nil")
 		PlayerTransport:SentToCFrame(player, spawnPoint)
@@ -31,7 +33,7 @@ end)
 
 local DungeonService = {}
 
-function DungeonService:CreateDungeon(seed: number)
+function DungeonService:CreateDungeon(seed: number): CFrame
 	local dungeon = generator:Generate(ORIGIN, SIZE, MIN_NODES, MAX_NODES, seed)
 	print(dungeon)
 
@@ -41,6 +43,8 @@ function DungeonService:CreateDungeon(seed: number)
 
 	dungeon.Model:SetAttribute(SPAWN_ATTRIBUTE, spawnPart:GetPivot())
 	spawnPoint = spawnPart:GetPivot() + Vector3.new(0, 4, 0)
+	assert(spawnPoint ~= nil, "")
+	return spawnPoint
 end
 
 function DungeonService:HasGeneratedDungeon()

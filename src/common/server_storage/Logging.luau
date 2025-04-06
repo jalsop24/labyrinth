@@ -12,7 +12,6 @@ type Record = {
 	Message: string,
 	Data: RecordData,
 	Timestamp: DateTime,
-	UtcMillis: number,
 	Source: string,
 	LineNum: number,
 	FuncName: string?,
@@ -40,7 +39,6 @@ function Logging:Log(message: string, data: RecordData)
 		Message = message,
 		Data = data,
 		Timestamp = DateTime.now(),
-		UtcMillis = tick() * 1000,
 		Source = source,
 		LineNum = lineNum,
 		FuncName = funcName,
@@ -73,7 +71,6 @@ function Logging.MemoryStoreHandler(record: Record)
 	queue:AddAsync({
 		Message = record.Message,
 		Timestamp = isoDatetime(record.Timestamp),
-		UtcMillis = record.UtcMillis,
 		Data = HttpService:JSONEncode(record.Data),
 		Source = record.Source,
 		LineNum = record.LineNum,

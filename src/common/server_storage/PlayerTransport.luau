@@ -1,15 +1,20 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
 local ServerStorage = game:GetService("ServerStorage")
 local TeleportService = game:GetService("TeleportService")
 
 local Env = require(ReplicatedStorage.Env)
 local Logging = require(ServerStorage.Logging)
 local Network = require(ServerStorage.Network)
-local ServerMessage = require(ServerStorage.ServerMessage)
 
 local PlayerTransport = {}
 
-function PlayerTransport:SendToPlace(player: Player)
+function PlayerTransport:SendToPlace(player: Player): string?
+	if RunService:IsStudio() then
+		Logging:Log("In studio - not teleporting player", { PlayerName = player.Name })
+		return
+	end
+
 	local placeId = nil
 	if game.PlaceId == tonumber(Env.DESTINATION_PLACE_ID) then
 		placeId = tonumber(Env.START_PLACE_ID)
@@ -30,7 +35,7 @@ function PlayerTransport:SendToPlace(player: Player)
 		PrivateServerId = result.PrivateServerId,
 	})
 
-	ServerMessage:SendMessage(result.PrivateServerId, { sourcePlace = game.JobId, seed = "1234" })
+	return result.PrivateServerId
 end
 
 function PlayerTransport:SentToCFrame(player: Player, destination: CFrame)
