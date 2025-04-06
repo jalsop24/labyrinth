@@ -4,6 +4,7 @@ local ServerStorage = game:GetService("ServerStorage")
 local DungeonGenerator = require(ServerStorage.DungeonGenerator)
 local Network = require(ServerStorage.Network)
 local PlayerTransport = require(ServerStorage.PlayerTransport)
+local ServerMessage = require(ServerStorage.ServerMessage)
 
 local TILE_SET = ReplicatedStorage.Assets.tile_set
 local ORIGIN = Vector3.new(0, 0, 0)
@@ -22,7 +23,8 @@ Network.Dungeon.On(function(player: Player, to_place: boolean)
 	print(player, to_place)
 
 	if to_place then
-		PlayerTransport:SendToPlace(player)
+		local result = PlayerTransport:SendToPlace(player)
+		ServerMessage:SendMessage(result.PrivateServerId, { sourcePlace = game.JobId, seed = "1234" })
 	else
 		assert(spawnPoint ~= nil, "Spawn point must not be nil")
 		PlayerTransport:SentToCFrame(player, spawnPoint)
