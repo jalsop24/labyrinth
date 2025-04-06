@@ -14,3 +14,10 @@ event Teleported = {
     call: ManyAsync,
     data: (destination: CFrame)
 }
+
+event TeleportHome = {
+    from: Client,
+    type: Reliable,
+    call: ManyAsync,
+    data: ()
+}
