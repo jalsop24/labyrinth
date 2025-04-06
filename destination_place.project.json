@@ -24,49 +24,6 @@
     "Workspace": {
       "$properties": {
         "FilteringEnabled": true
-      },
-      "Floor": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [
-            0.38823,
-            0.37254,
-            0.38823
-          ],
-          "Locked": true,
-          "CFrame": {
-            "CFrame": {
-              "position": [
-                0,
-                -10,
-                0
-              ],
-              "orientation": [
-                [
-                  1,
-                  0,
-                  0
-                ],
-                [
-                  0,
-                  1,
-                  0
-                ],
-                [
-                  0,
-                  0,
-                  1
-                ]
-              ]
-            }
-          },
-          "Size": [
-            512,
-            20,
-            512
-          ]
-        }
       }
     },
     "Lighting": {
@@ -90,6 +47,11 @@
     "TextChatService": {
       "$properties": {
         "ChatVersion": "TextChatService"
+      }
+    },
+    "Players": {
+      "$properties": {
+        "CharacterAutoLoads": false
       }
     }
   }
