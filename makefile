@@ -40,10 +40,13 @@ sourcemap:
 		rojo sourcemap $$place.project.json > $$place\_sourcemap.json; \
 	done
 
+package-types:
+	wally-package-types --sourcemap start_place_sourcemap.json Packages
+
 lsp-types-version:
 	curl -s -o /dev/null -w "%header{etag}" --head "${LSP_TYPES_URL}"
 
 lsp-types:
 	curl "${LSP_TYPES_URL}" -o robloxTypes.d.luau
 
-lint-setup: inject-env build-network install-packages sourcemap
+lint-setup: inject-env build-network install-packages sourcemap package-types
