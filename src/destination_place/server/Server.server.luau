@@ -29,8 +29,12 @@ local function generateDungeon(message: any)
 		return
 	end
 
-	local spawnLocation = DungeonService:CreateDungeon(message.seed)
-	createSpawnPoint(spawnLocation)
+	local spawnCframe = DungeonService:CreateDungeon(message.seed)
+	local spawnLocation = createSpawnPoint(spawnCframe)
+	Logging:Log(
+		"Made spawn point",
+		{ x = spawnLocation.Position.X, y = spawnLocation.Position.Y, z = spawnLocation.Position.Z }
+	)
 	Players.CharacterAutoLoads = true
 end
 
